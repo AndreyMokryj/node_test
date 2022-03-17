@@ -15,7 +15,8 @@
   "dependencies": {
     "amqplib": "^0.8.0",
     "bluebird": "^3.5.1",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "node-tesseract-ocr": "^2.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

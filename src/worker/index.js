@@ -5,11 +5,22 @@ import config from '../config'
 const assertQueueOptions = { durable: true }
 const consumeQueueOptions = { noAck: false }
 const { uri, workQueue } = config
+const tesseract = require("node-tesseract-ocr")
 
-const genRamdomTime = () => Math.random() * 10000
+const tesseractConfig = {
+    lang: "eng",
+    oem: 1,
+    psm: 3,
+}
 
-const processHeavyTask = msg => resolve(console.log('Message received'))
-    .then(setTimeout(() => console.log(msg.content.toString()), genRamdomTime()))
+const processHeavyTask = msg => resolve(tesseract
+    .recognize(msg.content.toString(), tesseractConfig)
+    .then((text) => {
+        console.log("Result:", text)
+    })
+    .catch((error) => {
+        console.log(error.message)
+    }))
 
 const assertAndConsumeQueue = (channel) => {
     console.log('Worker is running! Waiting for new messages...')
