@@ -8,7 +8,7 @@ const { uri, workQueue } = config
 
 
 const assertAndSendToQueue = (channel, data) => {
-    const bufferedData = Buffer.from(data)
+    const bufferedData = Buffer.from(data ? data : "")
 
     return channel.assertQueue(workQueue, assertQueueOptions)
         .then(() => channel.sendToQueue(workQueue, bufferedData, sendToQueueOptions))
@@ -19,8 +19,5 @@ const sendUrlToQueue = (url) => amqp.connect(uri)
     .then(connection => connection.createChannel())
     .then(channel => assertAndSendToQueue(channel, url))
 
-const start = (url) => sendUrlToQueue(url)
+export const start = (url) => sendUrlToQueue(url)
     .tap(() => console.log('The file url has been sent to queue'))
-    .then(() => process.exit(0))
-
-export default start()

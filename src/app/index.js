@@ -1,4 +1,4 @@
-import start from './publisher'
+import {start} from './publisher'
 
 process.env.NODE_ENV = 'development'
 
@@ -16,24 +16,10 @@ let file = 'data.json'
 
 if ((process.env.NODE_ENV = 'test')) file = 'data-test.json'
 
-// app.use((req, res, next) => {
-//     fs.readFile(file, (err, data) => {
-//         if (err)
-//             return res
-//                 .status(500)
-//                 .send({ message: 'Error while getting users' })
-//
-//         req.users = JSON.parse(data)
-//
-//         next()
-//     })
-// })
-
 app
     .route('/api/image')
     .post((req, res) => {
         if (req.body.fileUrl) {
-
             const fileUrl = req.body.fileUrl;
             console.log(fileUrl);
             start(fileUrl);
