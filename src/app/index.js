@@ -1,7 +1,9 @@
-import {start} from './publisher'
+import {start} from './publisher.js'
 
 process.env.NODE_ENV = 'development'
 
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const express = require('express'),
     app = express(),
     fs = require('fs')
@@ -18,6 +20,11 @@ if ((process.env.NODE_ENV = 'test')) file = 'data-test.json'
 
 app
     .route('/api/image')
+    .get((req, res) => {
+        return res
+            .status(200)
+            .send({ message: 'I am alive!' });
+    })
     .post((req, res) => {
         if (req.body.fileUrl) {
             const fileUrl = req.body.fileUrl;

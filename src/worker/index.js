@@ -1,10 +1,14 @@
 import amqp from 'amqplib'
-import { resolve } from 'bluebird'
-import config from '../config'
+import pkg from 'bluebird';
+const { resolve } = pkg;
+import config from '../config.js'
 
 const assertQueueOptions = { durable: true }
 const consumeQueueOptions = { noAck: false }
 const { uri, workQueue } = config
+
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const tesseract = require("node-tesseract-ocr")
 
 const tesseractConfig = {
