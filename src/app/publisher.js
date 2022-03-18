@@ -4,7 +4,7 @@ import config from '../config.js'
 
 const assertQueueOptions = { durable: true }
 const sendToQueueOptions = { persistent: true }
-const { uri, workQueue } = config
+const { rabbitUri, workQueue } = config
 
 
 const assertAndSendToQueue = (channel, data) => {
@@ -15,7 +15,7 @@ const assertAndSendToQueue = (channel, data) => {
         .then(() => channel.close())
 }
 
-const sendUrlToQueue = (url) => amqp.connect(uri)
+const sendUrlToQueue = (url) => amqp.connect(rabbitUri)
     .then(connection => connection.createChannel())
     .then(channel => assertAndSendToQueue(channel, url))
 

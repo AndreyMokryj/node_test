@@ -8,8 +8,9 @@ const express = require('express'),
     app = express(),
     fs = require('fs')
 
-const host = '0.0.0.0'
-const port = 10000
+import config from '../config.js'
+const { host, port } = config
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

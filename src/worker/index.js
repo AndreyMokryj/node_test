@@ -5,7 +5,7 @@ import config from '../config.js'
 
 const assertQueueOptions = { durable: true }
 const consumeQueueOptions = { noAck: false }
-const { uri, workQueue } = config
+const { rabbitUri, workQueue } = config
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -38,7 +38,7 @@ const assertAndConsumeQueue = (channel) => {
         .then(() => channel.consume(workQueue, ackMsg, consumeQueueOptions))
 }
 
-const listenToQueue = () => amqp.connect(uri)
+const listenToQueue = () => amqp.connect(rabbitUri)
     .then(connection => connection.createChannel())
     .then(channel => assertAndConsumeQueue(channel))
 
