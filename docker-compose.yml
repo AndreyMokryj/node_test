@@ -5,6 +5,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+    restart: always
+
     working_dir: /tmp
     volumes:
       - /tmp
@@ -24,6 +28,11 @@ services:
       - app-network
     ports:
       - 5672:5672
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1:5672" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 networks:
   app-network:

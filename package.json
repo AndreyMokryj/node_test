@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "worker": "node src/worker",
+    "worker": "sleep 10 && node src/worker",
     "app": "node src/app"
   },
   "keywords": [],
