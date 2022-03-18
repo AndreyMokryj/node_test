@@ -8,8 +8,8 @@ const express = require('express'),
     app = express(),
     fs = require('fs')
 
-const host = '127.0.0.1'
-const port = 7000
+const host = '0.0.0.0'
+const port = 10000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
