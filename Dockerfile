@@ -3,9 +3,7 @@ FROM node:16.9.1-alpine
 WORKDIR /tmp/
 COPY . /tmp
 
-#EXPOSE 10000
-
+RUN apk add --no-cache tesseract-ocr
 RUN npm i
 
-CMD [ "npm", "run", "app" ]
-#CMD [ "nodemon", "-L", "src/index.js" ]
+CMD [ "npx", "concurrently", "\"npm:app\"", "\"npm:worker\""]

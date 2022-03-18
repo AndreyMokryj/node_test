@@ -13,7 +13,7 @@ services:
     ports:
       - 10000:10000
     environment:
-      - MESSAGE_QUEUE=amqp://rabbitmq
+      - rabbbitUri=amqp://rabbitmq
     links:
       - rabbitmq
 

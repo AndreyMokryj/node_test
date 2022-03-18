@@ -17,5 +17,8 @@
     "bluebird": "^3.5.1",
     "express": "^4.17.3",
     "node-tesseract-ocr": "^2.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }
