@@ -17,14 +17,10 @@ const tesseractConfig = {
     psm: 3,
 }
 
-const processHeavyTask = msg => resolve(tesseract
-    .recognize(msg.content.toString(), tesseractConfig)
-    .then((text) => {
-        console.log("Result:", text)
-    })
-    .catch((error) => {
-        console.log(error.message)
-    }))
+const processHeavyTask = async msg => {
+    const result = await (recognizeFromFileUrl(msg.content.toString()))
+    console.log('processHeavyTask returned result: ' + result)
+}
 
 const assertAndConsumeQueue = (channel) => {
     console.log('Worker is running! Waiting for new messages...')
@@ -44,3 +40,15 @@ const listenToQueue = () => amqp.connect(rabbitUri)
 
 
 export default listenToQueue()
+
+export async function recognizeFromFileUrl(url) {
+    return tesseract.recognize(url, tesseractConfig)
+        .then(text => {
+            console.log('Result: \n' + text)
+            return text
+        })
+        .catch((error) => {
+            console.log(error.message)
+            return undefined
+        })
+}
